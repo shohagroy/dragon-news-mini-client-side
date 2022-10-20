@@ -1,12 +1,31 @@
-import React from 'react';
+import { GoogleAuthProvider } from 'firebase/auth';
+import React, { useContext } from 'react';
+import { AuthProvaider } from '../AuthContext/AuthContext';
 
 
 const RightSide = () => {
+
+
+    const provaider = new GoogleAuthProvider();
+
+    const { googleSignIn } = useContext(AuthProvaider)
+
+    const loginGoogleHandelar = ()=>{
+        googleSignIn(provaider)
+        .then(res => {
+            const user = res.user;
+            console.log(user);
+        })
+        .catch(error => console.error(error))
+
+    }
+
+
     return (
         <div className='fixed w-[300px]'>
             {/* signup button section  */}
             <div>
-                <button type="button" className="px-8 w-full my-2 py-3 font-semibold border rounded hover:bg-white duration-300 border-blue-400 hover:text-blue-400"><span className=''><i className="fa-brands fa-google"></i></span> Login With Google</button>
+                <button onClick={loginGoogleHandelar} type="button" className="px-8 w-full my-2 py-3 font-semibold border rounded hover:bg-blue-600 duration-300 border-black hover:text-white"><span className=''><i className="fa-brands fa-google"></i></span> Login With Google</button>
                 <button type="button" className="px-8 w-full py-3 font-semibold border rounded hover:bg-gray-700 duration-300 border-gray-700 hover:text-white"><span><i className="fa-brands fa-github"></i></span> Login With GitHub</button>
             </div>
 

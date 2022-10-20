@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import { AuthProvaider } from '../AuthContext/AuthContext';
 
 const Header = () => {
+
+    const {user} = useContext(AuthProvaider);
+
+    const {displayName } = user;
+
+
     return (
-        <header className="p-4 bg-white text-gray-900 sticky top-0">
-            <div className="container flex justify-between h-16 mx-auto px-20">
+        <header className="p-4 bg-gray-200 text-gray-900 sticky top-0">
+            <div className="container flex justify-between items-center h-16 mx-auto px-20">
                 <div>
                     <div className='flex justify-center items-center'>
                     <Link to='/'><h1 className='text-red-600 text-3xl font-bold font-serif'>Dragon News</h1></Link>
@@ -13,10 +20,11 @@ const Header = () => {
                 </div>
 
                 <div className='flex justify-center items-center'>
-                <NavLink className="bg-blue-600 py-3 px-10 mx-1 text-white rounded-lg">News</NavLink>
-                    <NavLink className="bg-red-600 py-3 px-10 mx-1 text-white rounded-lg"> <span><i className="fa-solid fa-plus"></i></span> Advertise</NavLink>
-                    <div>
-                        <img className='bg-red-400 w-[70px] h-[70px] rounded-full' src="" alt="" />
+                    <NavLink className="bg-red-600 py-2 px-5 mr-3 text-white rounded-lg"> <span><i className="fa-solid fa-plus"></i></span> Advertise</NavLink>
+                    <div className='flex justify-center items-center'>
+                        
+                        <img className='bg-red-400 w-[40px] h-[40px] rounded-full' src="" alt="" />
+                        <p className='text-gray-900 ml-2'>{displayName}</p>
                     </div>
                 </div>
                     
