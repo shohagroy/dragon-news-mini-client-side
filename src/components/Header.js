@@ -1,12 +1,24 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { AuthProvaider } from '../AuthContext/AuthContext';
 
+
+
+
 const Header = () => {
 
-    const {user} = useContext(AuthProvaider);
+const [profile, setProfile] = useState(false)
 
-    const {displayName } = user;
+    const {user, userSignOut} = useContext(AuthProvaider);
+
+    const { photoURL } = user;
+
+
+    const signOuthandelar = ()=>{
+        userSignOut()
+        setProfile(false)
+        console.log('user sign out');
+    }
 
 
     return (
@@ -19,12 +31,30 @@ const Header = () => {
                     </div>
                 </div>
 
-                <div className='flex justify-center items-center'>
+                <div className={`${user ? 'hidden' : 'block'}`}>
+                    <Link to='/login'><button className='bg-blue-600 text-white px-8 py-2 text-xl rounded-md'>Login</button></Link>
+                </div>
+
+                <div className={`${user ? 'flex' : 'hidden'} justify-center items-center`}>
                     <NavLink className="bg-red-600 py-2 px-5 mr-3 text-white rounded-lg"> <span><i className="fa-solid fa-plus"></i></span> Advertise</NavLink>
-                    <div className='flex justify-center items-center'>
+                    <div className='flex justify-center items-center relative'>
                         
-                        <img className='bg-red-400 w-[40px] h-[40px] rounded-full' src="" alt="" />
-                        <p className='text-gray-900 ml-2'>{displayName}</p>
+                    
+                        <div onClick={()=>setProfile(!profile)} className=' flex justify-center items-center border-2 border-black w-[40px] cursor-pointer h-[40px] rounded-full'>
+
+                            <span className={`${user.photoURL ? 'hidden' : 'relative'}`}>
+                                <i className="fa-regular fa-user text-2xl"></i>
+                            </span>
+                        
+                            <img className={`${user.photoURL ? 'relative' : 'hidden'} rounded-full`}  src={user.photoURL} alt="" />
+
+                        </div>
+                        
+                        
+                        <div className={` ${profile ? 'absolute' : 'hidden' } rounded-lg border border-black top-[40px] w-[150px] bg-white p-2 left-[-20px]`}>
+                            <Link to='update-profile'><button className=' font-bold text-blue-600'>Update profile</button></Link>
+                            <button onClick={signOuthandelar} to='update-profile' className=' font-bold text-red-400 hover:text-red-600 '>Log Out</button>
+                        </div>
                     </div>
                 </div>
                     

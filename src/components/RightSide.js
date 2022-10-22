@@ -14,7 +14,6 @@ const RightSide = () => {
         googleSignIn(provaider)
         .then(res => {
             const user = res.user;
-            console.log(user);
         })
         .catch(error => console.error(error))
 
@@ -24,7 +23,7 @@ const RightSide = () => {
     return (
         <div className='fixed w-[300px]'>
             {/* signup button section  */}
-            <div>
+            <div className=''>
                 <button onClick={loginGoogleHandelar} type="button" className="px-8 w-full my-2 py-3 font-semibold border rounded hover:bg-blue-600 duration-300 border-black hover:text-white"><span className=''><i className="fa-brands fa-google"></i></span> Login With Google</button>
                 <button type="button" className="px-8 w-full py-3 font-semibold border rounded hover:bg-gray-700 duration-300 border-gray-700 hover:text-white"><span><i className="fa-brands fa-github"></i></span> Login With GitHub</button>
             </div>

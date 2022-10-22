@@ -7,9 +7,6 @@ const FullNews = () => {
 
     const { author, category_id, details, image_url, rating, title, total_view } = fullNews;
 
-    console.log(fullNews);
-
-
     return (
         <div className="rounded-md shadow-md m-4 bg-white text-gray-900">
             <div className="flex items-center justify-between p-3">
